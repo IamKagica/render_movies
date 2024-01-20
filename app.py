@@ -213,9 +213,7 @@ def on_getting_recommendations(style, ratings, ids):
     rating_input = {
         ids[i]["movie_id"]: int(rating) for i, rating in enumerate(ratings) if rating is not None
     }
-    
-    print(rating_input)
-  
+      
     recommended_movies = get_recommended_movies(rating_input)
  
     return [get_movie_card(movie) for idx, movie in recommended_movies.iterrows()]
