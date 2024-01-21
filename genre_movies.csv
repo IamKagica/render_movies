@@ -1,0 +1,181 @@
+movie_id,title,genres,recommended_type
+260,Star Wars: Episode IV - A New Hope (1977),Action|Adventure|Fantasy|Sci-Fi,Action
+1196,Star Wars: Episode V - The Empire Strikes Back (1980),Action|Adventure|Drama|Sci-Fi|War,Action
+1198,Raiders of the Lost Ark (1981),Action|Adventure,Action
+2028,Saving Private Ryan (1998),Action|Drama|War,Action
+2571,"Matrix, The (1999)",Action|Sci-Fi|Thriller,Action
+858,"Godfather, The (1972)",Action|Crime|Drama,Action
+1197,"Princess Bride, The (1987)",Action|Adventure|Comedy|Romance,Action
+110,Braveheart (1995),Action|Drama|War,Action
+1210,Star Wars: Episode VI - Return of the Jedi (1983),Action|Adventure|Romance|Sci-Fi|War,Action
+589,Terminator 2: Judgment Day (1991),Action|Sci-Fi|Thriller,Action
+260,Star Wars: Episode IV - A New Hope (1977),Action|Adventure|Fantasy|Sci-Fi,Adventure
+1196,Star Wars: Episode V - The Empire Strikes Back (1980),Action|Adventure|Drama|Sci-Fi|War,Adventure
+1198,Raiders of the Lost Ark (1981),Action|Adventure,Adventure
+1197,"Princess Bride, The (1987)",Action|Adventure|Comedy|Romance,Adventure
+1210,Star Wars: Episode VI - Return of the Jedi (1983),Action|Adventure|Romance|Sci-Fi|War,Adventure
+919,"Wizard of Oz, The (1939)",Adventure|Children's|Drama|Musical,Adventure
+480,Jurassic Park (1993),Action|Adventure|Sci-Fi,Adventure
+1259,Stand by Me (1986),Adventure|Comedy|Drama,Adventure
+1580,Men in Black (1997),Action|Adventure|Comedy|Sci-Fi,Adventure
+1291,Indiana Jones and the Last Crusade (1989),Action|Adventure,Adventure
+1,Toy Story (1995),Animation|Children's|Comedy,Animation
+3114,Toy Story 2 (1999),Animation|Children's|Comedy,Animation
+2355,"Bug's Life, A (1998)",Animation|Children's|Comedy,Animation
+1148,"Wrong Trousers, The (1993)",Animation|Comedy,Animation
+2987,Who Framed Roger Rabbit? (1988),Adventure|Animation|Film-Noir,Animation
+3751,Chicken Run (2000),Animation|Children's|Comedy,Animation
+588,Aladdin (1992),Animation|Children's|Comedy|Musical,Animation
+745,"Close Shave, A (1995)",Animation|Comedy|Thriller,Animation
+2700,"South Park: Bigger, Longer and Uncut (1999)",Animation|Comedy,Animation
+364,"Lion King, The (1994)",Animation|Children's|Musical,Animation
+1,Toy Story (1995),Animation|Children's|Comedy,Children's
+1097,E.T. the Extra-Terrestrial (1982),Children's|Drama|Fantasy|Sci-Fi,Children's
+919,"Wizard of Oz, The (1939)",Adventure|Children's|Drama|Musical,Children's
+3114,Toy Story 2 (1999),Animation|Children's|Comedy,Children's
+34,Babe (1995),Children's|Comedy|Drama,Children's
+2355,"Bug's Life, A (1998)",Animation|Children's|Comedy,Children's
+3751,Chicken Run (2000),Animation|Children's|Comedy,Children's
+1073,Willy Wonka and the Chocolate Factory (1971),Adventure|Children's|Comedy|Fantasy,Children's
+588,Aladdin (1992),Animation|Children's|Comedy|Musical,Children's
+364,"Lion King, The (1994)",Animation|Children's|Musical,Children's
+2858,American Beauty (1999),Comedy|Drama,Comedy
+1197,"Princess Bride, The (1987)",Action|Adventure|Comedy|Romance,Comedy
+2396,Shakespeare in Love (1998),Comedy|Romance,Comedy
+1270,Back to the Future (1985),Comedy|Sci-Fi,Comedy
+2997,Being John Malkovich (1999),Comedy,Comedy
+356,Forrest Gump (1994),Comedy|Romance|War,Comedy
+1,Toy Story (1995),Animation|Children's|Comedy,Comedy
+1265,Groundhog Day (1993),Comedy|Romance,Comedy
+1136,Monty Python and the Holy Grail (1974),Comedy,Comedy
+2716,Ghostbusters (1984),Comedy|Horror,Comedy
+858,"Godfather, The (1972)",Action|Crime|Drama,Crime
+608,Fargo (1996),Crime|Drama|Thriller,Crime
+1617,L.A. Confidential (1997),Crime|Film-Noir|Mystery|Thriller,Crime
+296,Pulp Fiction (1994),Crime|Drama,Crime
+50,"Usual Suspects, The (1995)",Crime|Thriller,Crime
+1221,"Godfather: Part II, The (1974)",Action|Crime|Drama,Crime
+1213,GoodFellas (1990),Crime|Drama,Crime
+2000,Lethal Weapon (1987),Action|Comedy|Crime|Drama,Crime
+1089,Reservoir Dogs (1992),Crime|Thriller,Crime
+1234,"Sting, The (1973)",Comedy|Crime,Crime
+2064,Roger & Me (1989),Comedy|Documentary,Documentary
+246,Hoop Dreams (1994),Documentary,Documentary
+162,Crumb (1994),Documentary,Documentary
+1147,When We Were Kings (1996),Documentary,Documentary
+1189,"Thin Blue Line, The (1988)",Documentary,Documentary
+3007,American Movie (1999),Documentary,Documentary
+2859,Stop Making Sense (1984),Documentary,Documentary
+2677,Buena Vista Social Club (1999),Documentary,Documentary
+1361,Paradise Lost: The Child Murders at Robin Hood Hills (1996),Documentary,Documentary
+2693,Trekkies (1997),Documentary,Documentary
+2858,American Beauty (1999),Comedy|Drama,Drama
+1196,Star Wars: Episode V - The Empire Strikes Back (1980),Action|Adventure|Drama|Sci-Fi|War,Drama
+2028,Saving Private Ryan (1998),Action|Drama|War,Drama
+593,"Silence of the Lambs, The (1991)",Drama|Thriller,Drama
+527,Schindler's List (1993),Drama|War,Drama
+318,"Shawshank Redemption, The (1994)",Drama,Drama
+858,"Godfather, The (1972)",Action|Crime|Drama,Drama
+608,Fargo (1996),Crime|Drama|Thriller,Drama
+110,Braveheart (1995),Action|Drama|War,Drama
+296,Pulp Fiction (1994),Crime|Drama,Drama
+260,Star Wars: Episode IV - A New Hope (1977),Action|Adventure|Fantasy|Sci-Fi,Fantasy
+1097,E.T. the Extra-Terrestrial (1982),Children's|Drama|Fantasy|Sci-Fi,Fantasy
+2797,Big (1988),Comedy|Fantasy,Fantasy
+1073,Willy Wonka and the Chocolate Factory (1971),Adventure|Children's|Comedy|Fantasy,Fantasy
+2628,Star Wars: Episode I - The Phantom Menace (1999),Action|Adventure|Fantasy|Sci-Fi,Fantasy
+2174,Beetlejuice (1988),Comedy|Fantasy,Fantasy
+2968,Time Bandits (1981),Adventure|Fantasy|Sci-Fi,Fantasy
+2872,Excalibur (1981),Action|Drama|Fantasy|Romance,Fantasy
+2100,Splash (1984),Comedy|Fantasy|Romance,Fantasy
+2140,"Dark Crystal, The (1982)",Children's|Fantasy|Sci-Fi,Fantasy
+1617,L.A. Confidential (1997),Crime|Film-Noir|Mystery|Thriller,Film-Noir
+541,Blade Runner (1982),Film-Noir|Sci-Fi,Film-Noir
+1252,Chinatown (1974),Film-Noir|Mystery|Thriller,Film-Noir
+913,"Maltese Falcon, The (1941)",Film-Noir|Mystery,Film-Noir
+2987,Who Framed Roger Rabbit? (1988),Adventure|Animation|Film-Noir,Film-Noir
+1267,"Manchurian Candidate, The (1962)",Film-Noir|Thriller,Film-Noir
+3435,Double Indemnity (1944),Crime|Film-Noir,Film-Noir
+3683,Blood Simple (1984),Drama|Film-Noir,Film-Noir
+1748,Dark City (1998),Film-Noir|Sci-Fi|Thriller,Film-Noir
+1284,"Big Sleep, The (1946)",Film-Noir|Mystery,Film-Noir
+1214,Alien (1979),Action|Horror|Sci-Fi|Thriller,Horror
+2716,Ghostbusters (1984),Comedy|Horror,Horror
+1387,Jaws (1975),Action|Horror,Horror
+1219,Psycho (1960),Horror|Thriller,Horror
+1278,Young Frankenstein (1974),Comedy|Horror,Horror
+1258,"Shining, The (1980)",Horror,Horror
+1997,"Exorcist, The (1973)",Horror,Horror
+1215,Army of Darkness (1993),Action|Adventure|Comedy|Horror|Sci-Fi,Horror
+3499,Misery (1990),Horror,Horror
+1333,"Birds, The (1963)",Horror,Horror
+919,"Wizard of Oz, The (1939)",Adventure|Children's|Drama|Musical,Musical
+1288,This Is Spinal Tap (1984),Comedy|Drama|Musical,Musical
+1220,"Blues Brothers, The (1980)",Action|Comedy|Musical,Musical
+588,Aladdin (1992),Animation|Children's|Comedy|Musical,Musical
+364,"Lion King, The (1994)",Animation|Children's|Musical,Musical
+899,Singin' in the Rain (1952),Musical|Romance,Musical
+595,Beauty and the Beast (1991),Animation|Children's|Musical,Musical
+1028,Mary Poppins (1964),Children's|Comedy|Musical,Musical
+1282,Fantasia (1940),Animation|Children's|Musical,Musical
+1035,"Sound of Music, The (1965)",Musical,Musical
+1617,L.A. Confidential (1997),Crime|Film-Noir|Mystery|Thriller,Mystery
+924,2001: A Space Odyssey (1968),Drama|Mystery|Sci-Fi|Thriller,Mystery
+1252,Chinatown (1974),Film-Noir|Mystery|Thriller,Mystery
+904,Rear Window (1954),Mystery|Thriller,Mystery
+913,"Maltese Falcon, The (1941)",Film-Noir|Mystery,Mystery
+903,Vertigo (1958),Mystery|Thriller,Mystery
+1732,"Big Lebowski, The (1998)",Comedy|Crime|Mystery|Thriller,Mystery
+1625,"Game, The (1997)",Mystery|Thriller,Mystery
+1269,Arsenic and Old Lace (1944),Comedy|Mystery|Thriller,Mystery
+1284,"Big Sleep, The (1946)",Film-Noir|Mystery,Mystery
+1197,"Princess Bride, The (1987)",Action|Adventure|Comedy|Romance,Romance
+1210,Star Wars: Episode VI - Return of the Jedi (1983),Action|Adventure|Romance|Sci-Fi|War,Romance
+2396,Shakespeare in Love (1998),Comedy|Romance,Romance
+356,Forrest Gump (1994),Comedy|Romance|War,Romance
+912,Casablanca (1942),Drama|Romance|War,Romance
+1265,Groundhog Day (1993),Comedy|Romance,Romance
+1307,When Harry Met Sally... (1989),Comedy|Romance,Romance
+1247,"Graduate, The (1967)",Drama|Romance,Romance
+1230,Annie Hall (1977),Comedy|Romance,Romance
+969,"African Queen, The (1951)",Action|Adventure|Romance|War,Romance
+260,Star Wars: Episode IV - A New Hope (1977),Action|Adventure|Fantasy|Sci-Fi,Sci-Fi
+1196,Star Wars: Episode V - The Empire Strikes Back (1980),Action|Adventure|Drama|Sci-Fi|War,Sci-Fi
+2571,"Matrix, The (1999)",Action|Sci-Fi|Thriller,Sci-Fi
+1210,Star Wars: Episode VI - Return of the Jedi (1983),Action|Adventure|Romance|Sci-Fi|War,Sci-Fi
+589,Terminator 2: Judgment Day (1991),Action|Sci-Fi|Thriller,Sci-Fi
+1270,Back to the Future (1985),Comedy|Sci-Fi,Sci-Fi
+1240,"Terminator, The (1984)",Action|Sci-Fi|Thriller,Sci-Fi
+1214,Alien (1979),Action|Horror|Sci-Fi|Thriller,Sci-Fi
+541,Blade Runner (1982),Film-Noir|Sci-Fi,Sci-Fi
+1097,E.T. the Extra-Terrestrial (1982),Children's|Drama|Fantasy|Sci-Fi,Sci-Fi
+593,"Silence of the Lambs, The (1991)",Drama|Thriller,Thriller
+2762,"Sixth Sense, The (1999)",Thriller,Thriller
+2571,"Matrix, The (1999)",Action|Sci-Fi|Thriller,Thriller
+608,Fargo (1996),Crime|Drama|Thriller,Thriller
+589,Terminator 2: Judgment Day (1991),Action|Sci-Fi|Thriller,Thriller
+1617,L.A. Confidential (1997),Crime|Film-Noir|Mystery|Thriller,Thriller
+50,"Usual Suspects, The (1995)",Crime|Thriller,Thriller
+1240,"Terminator, The (1984)",Action|Sci-Fi|Thriller,Thriller
+1214,Alien (1979),Action|Horror|Sci-Fi|Thriller,Thriller
+457,"Fugitive, The (1993)",Action|Thriller,Thriller
+1196,Star Wars: Episode V - The Empire Strikes Back (1980),Action|Adventure|Drama|Sci-Fi|War,War
+2028,Saving Private Ryan (1998),Action|Drama|War,War
+527,Schindler's List (1993),Drama|War,War
+110,Braveheart (1995),Action|Drama|War,War
+1210,Star Wars: Episode VI - Return of the Jedi (1983),Action|Adventure|Romance|Sci-Fi|War,War
+356,Forrest Gump (1994),Comedy|Romance|War,War
+912,Casablanca (1942),Drama|Romance|War,War
+1200,Aliens (1986),Action|Sci-Fi|Thriller|War,War
+750,Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1963),Sci-Fi|War,War
+1208,Apocalypse Now (1979),Drama|War,War
+1304,Butch Cassidy and the Sundance Kid (1969),Action|Comedy|Western,Western
+590,Dances with Wolves (1990),Adventure|Drama|Western,Western
+3671,Blazing Saddles (1974),Comedy|Western,Western
+1266,Unforgiven (1992),Western,Western
+1201,"Good, The Bad and The Ugly, The (1966)",Action|Western,Western
+3037,Little Big Man (1970),Comedy|Drama|Western,Western
+2951,"Fistful of Dollars, A (1964)",Action|Western,Western
+553,Tombstone (1993),Western,Western
+1283,High Noon (1952),Western,Western
+368,Maverick (1994),Action|Comedy|Western,Western
