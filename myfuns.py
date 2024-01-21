@@ -3,6 +3,7 @@
 
 import pandas as pd
 import numpy as np
+from scipy.sparse import csr_matrix
 import os
 import requests
 
@@ -56,18 +57,30 @@ def get_recommended_movies(new_user_ratings):
     # Using IBCF function
     
     # Loading similarity matrix
-    S = pd.read_csv('Symmetry_top30.csv')
+    # S = pd.read_csv('Symmetry_top30.csv')
+    S_numrows = pd.read_csv('Symmetry_top30.csv', usecols=[0])
     
     # Load the CSV file containing R into a DataFrame
     R = pd.read_csv("Rmat.csv")
     
-    num_movies = np.shape(S)[0]
+    num_movies = np.shape(S_numrows)[0]
+    # num_movies = np.shape(S)[0]
+    # num_movies = (S)[0]
     list_scores = np.zeros(num_movies)
     
     # Calculating predictions
     for l in range(num_movies):
         
-        Sl = S.iloc[l, :]
+        jump = 500
+        if (l % jump == 0):
+            subtract = l
+            S_partial = pd.read_csv("Symmetry_top30.csv", skiprows=l, nrows=jump)
+            print(l)
+        
+        # Reading one hundred lines at a time
+        # Sl = pd.read_csv("Symmetry_top30.csv", skiprows=l, nrows=1)
+        
+        Sl = S_partial.iloc[l - subtract, :]
         Sl_w = Sl.to_numpy() * newuser.to_numpy()
         numerator = np.nansum(Sl_w)
         
@@ -108,6 +121,9 @@ def get_recommended_movies(new_user_ratings):
                 IBCF_dict.loc[i] = movies.iloc[j, :]
     
     return IBCF_dict
+
+test = get_recommended_movies({1: 5, 2: 4})
+print(test)
 
 def genre_movies(genre: str):
     
