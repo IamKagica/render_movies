@@ -70,8 +70,8 @@ def get_recommended_movies(new_user_ratings):
     # Calculating predictions
     for l in range(num_movies):
         
-        jump = 200
-        # Reading two hundred lines at a time
+        jump = 100
+        # Reading one hundred lines at a time
         if (l % jump == 0):
             subtract = l
             S_partial = pd.read_csv("Symmetry_top30.csv", skiprows=l, nrows=jump)
