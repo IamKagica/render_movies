@@ -71,13 +71,13 @@ def get_recommended_movies(new_user_ratings):
     # Calculating predictions
     for l in range(num_movies):
         
-        jump = 500
+        jump = 200
+        # Reading two hundred lines at a time
         if (l % jump == 0):
             subtract = l
             S_partial = pd.read_csv("Symmetry_top30.csv", skiprows=l, nrows=jump)
-            print(l)
-        
-        # Reading one hundred lines at a time
+            
+        # Reading one line at a time
         # Sl = pd.read_csv("Symmetry_top30.csv", skiprows=l, nrows=1)
         
         Sl = S_partial.iloc[l - subtract, :]
@@ -119,11 +119,8 @@ def get_recommended_movies(new_user_ratings):
         for j in range(len(movies)):
             if (unew_movie_nums[i] == ('m' + str(movies.iloc[j].loc['movie_id']))):
                 IBCF_dict.loc[i] = movies.iloc[j, :]
-    
+                    
     return IBCF_dict
-
-test = get_recommended_movies({1: 5, 2: 4})
-print(test)
 
 def genre_movies(genre: str):
     
@@ -175,7 +172,7 @@ def genre_movies(genre: str):
         for j in range(len(movies)):
             if (popular_genre_IDs[i] == ('m' + str(movies.iloc[j].loc['movie_id']))):
                 popular_genre_movies.loc[i] = movies.iloc[j, :]
-    
+        
     return popular_genre_movies
 
 def store_movies(genres):
