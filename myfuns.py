@@ -70,14 +70,17 @@ def get_recommended_movies(new_user_ratings):
     # Calculating predictions
     for l in range(num_movies):
         
-        jump = 100
-        # Reading one hundred lines at a time
+        jump = 50
+        # Reading fifty lines at a time
         if (l % jump == 0):
             subtract = l
             S_partial = pd.read_csv("Symmetry_top30.csv", skiprows=l, nrows=jump)
+            print(l)
             
         # Reading one line at a time
         # Sl = pd.read_csv("Symmetry_top30.csv", skiprows=l, nrows=1)
+        
+        # Sl = S.iloc[l, :]
         
         Sl = S_partial.iloc[l - subtract, :]
         Sl_w = Sl.to_numpy() * newuser.to_numpy()
@@ -100,6 +103,8 @@ def get_recommended_movies(new_user_ratings):
     top_indices = np.argsort(list_scores)[-10:][::-1]
     
     unew_movie_nums = []
+    
+    print(top_indices)
     
     for i in range(len(top_indices)):
                 
