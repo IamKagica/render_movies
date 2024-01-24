@@ -259,9 +259,50 @@ def get_recommended_movies(new_user_ratings):
     # num_movies = np.shape(S)[0]
     # num_movies = (S)[0]
     list_scores = np.zeros(num_movies)
-                
-    # Using IBCF function
     
+    # Calculating predictions
+    for l in range(num_movies):
+        
+        """
+        jump = 500
+        # Reading five hundred lines at a time
+        if (l % jump == 0):
+            subtract = l
+            chunks = pd.read_csv("Symmetry_top30.csv", skiprows=l, nrows=jump, chunksize=jump//10)
+            S_partial = pd.concat(chunks)
+        """
+                    
+        Sl = S.iloc[l, :]
+        
+        # Sl = S_partial.iloc[l - subtract, :]
+        Sl_w = Sl.to_numpy() * newuser.to_numpy()
+        numerator = np.nansum(Sl_w)
+        
+        Sl_1 = Sl.to_numpy() * (newuser.to_numpy() / newuser.to_numpy())
+        denominator = np.nansum(Sl_1)
+        
+        # Check if the object is a dictionary
+        if isinstance(new_user_ratings, dict):
+            if new_user_ratings.get(l) is not None:
+                # Will set movies that have already been seen as lowest priority.
+                list_scores[l] = -1
+            elif (np.isnan(denominator) == True or denominator == 0):
+                # If there aren't enough predictions, will set to zero. 
+                list_scores[l] = 0
+            else:
+                score_pred = (numerator / denominator)
+                list_scores[l] = score_pred
+        else:
+            if (np.isnan(newuser.iloc[l]) == False):
+                # Will set movies that have already been seen as lowest priority.
+                list_scores[l] = -1
+            elif (np.isnan(denominator) == True or denominator == 0):
+                # If there aren't enough predictions, will set to zero. 
+                list_scores[l] = 0
+            else:
+                score_pred = (numerator / denominator)
+                list_scores[l] = score_pred
+                    
     return movies.head(10)
     
 def get_recommended_movies2(new_user_ratings):
