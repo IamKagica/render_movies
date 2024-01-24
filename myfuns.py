@@ -27,6 +27,26 @@ genres = list(
 # Flag to use smaller CSV file
 S0_flag = True
 
+# Preparing a smaller version of the R matrix
+def make_small_R():
+    
+    # Load the CSV file containing R into a DataFrame
+    R = pd.read_csv("Rmat.csv")
+    
+    # Create a new DataFrame with the top 3 rows
+    Rsmall = R.head(3).copy()
+    Rsmall.to_csv('Rsmall.csv', index=True)
+    
+# To make S0 if needed
+Rsmall_path = "Rsmall.csv"
+if os.path.exists(Rsmall_path):
+    Rsmall = pd.read_csv(Rsmall_path)
+else:
+    make_small_R()
+    # Saving and Loading Dataframe
+    Rsmall_ = pd.read_csv(Rsmall_path)
+#####
+
 # Preparing a smaller CSV file involving only 
 # 100 columns to account for limited RAM on hosting site.
 # Getting indices of the 100 columns with the most ratings.
@@ -35,7 +55,7 @@ S0_flag = True
 def make_small_S0():
     
     # Load the CSV file containing R into a DataFrame
-    R = pd.read_csv("Rmat.csv")
+    R = pd.read_csv("Rsmall.csv")
     
     full_top30 = pd.read_csv('Symmetry_top30.csv')
 
@@ -91,7 +111,7 @@ def movieID_match_columnIndex():
     movie2col = pd.DataFrame(columns=columns)
 
     # Load the CSV file containing R into a DataFrame
-    R = pd.read_csv("Rmat.csv")
+    R = pd.read_csv("Rsmall.csv")
     
     for i in range(len(R.columns)):
         for j in range(len(movies)):
@@ -167,7 +187,7 @@ def get_displayed_movies():
 def dict_to_df(new_user_dict):
     
     # Load the CSV file containing R into a DataFrame
-    R = pd.read_csv("Rmat.csv")
+    R = pd.read_csv("Rsmall.csv")
     
     # Load the CSV containing the conversion from movie index
     # to the index of the Similarity matrix
@@ -206,6 +226,8 @@ def small_df(df_full):
         
     return small_ratings
 
+# Testing
+"""
 def get_recommended_movies(new_user_ratings):
     
     # Convert the dictionary to a DataFrame if needed
@@ -214,15 +236,6 @@ def get_recommended_movies(new_user_ratings):
         newuser = dict_to_df(new_user_ratings)
     else:
         newuser = new_user_ratings
-    
-    # Testing #
-    """
-    newuser.iloc[2429] = 1
-    newuser.iloc[2466] = 4
-    newuser.iloc[1924] = 5
-    newuser.iloc[1453] = 5
-    newuser.iloc[2409] = 5
-    """
         
     if(S0_flag == True):
         newuser = small_df(newuser)
@@ -230,8 +243,9 @@ def get_recommended_movies(new_user_ratings):
     # Using IBCF function
     
     return movies.head(10)
+"""
     
-def get_recommended_movies2(new_user_ratings):
+def get_recommended_movies(new_user_ratings):
     
     # Convert the dictionary to a DataFrame if needed
     # Check if the variable is a dictionary
@@ -268,7 +282,7 @@ def get_recommended_movies2(new_user_ratings):
         S_numrows = pd.read_csv('Symmetry_top30.csv', usecols=[0])
     
     # Load the CSV file containing R into a DataFrame
-    R = pd.read_csv("Rmat.csv")
+    R = pd.read_csv("Rsmall.csv")
     
     num_movies = np.shape(S_numrows)[0]
     # num_movies = np.shape(S)[0]
@@ -379,7 +393,7 @@ def genre_movies(genre: str):
             movie_num.append('m' + str(movies.iloc[i].loc['movie_id']))
         
     # Load the CSV file containing R into a DataFrame
-    R = pd.read_csv("Rmat.csv")
+    R = pd.read_csv("Rsmall.csv")
     
     # Get scores for all movies in the genre
     movie_rec_score = []
