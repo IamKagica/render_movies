@@ -227,6 +227,8 @@ def get_recommended_movies(new_user_ratings):
     if(S0_flag == True):
         newuser = small_df(newuser)
         
+    return movies.head(10)
+        
     # print(np.nansum(newuser))
 
     # Using IBCF function
