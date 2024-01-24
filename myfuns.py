@@ -24,8 +24,144 @@ genres = list(
     sorted(set([genre for genres in movies.genres.unique() for genre in genres.split("|")]))
 )
 
+# Flag to use smaller CSV file
+S0_flag = True
+
+# Preparing a smaller CSV file involving only 
+# 100 columns to account for limited RAM on hosting site.
+# Getting indices of the 100 columns with the most ratings.
+# Storing the dataframe in separate csv file.
+
+def make_small_S0():
+    
+    # Load the CSV file containing R into a DataFrame
+    R = pd.read_csv("Rmat.csv")
+    
+    full_top30 = pd.read_csv('Symmetry_top30.csv')
+
+    # Step 1: Count the number of NaN entries in each column
+    nan_counts = full_top30.isna().sum(axis=0)
+    
+    # Step 2: Get the names of the top 100 columns with the fewest NaN entries
+    top_columns = nan_counts.nsmallest(100).index
+    
+    # Step 3: Select the columns from the DataFrame
+    limited_top30 = full_top30[top_columns]
+    
+    # Get the indices corresponding to movies dataframe
+    
+    most_rated_m = []
+    
+    for i in range(len(top_columns)):
+    
+        # If you have the index of a column, you can get its name
+        column_index = int(top_columns[i])  # Getting the desired index
+        column_name_at_index = R.columns[column_index]
+        most_rated_m.append(column_name_at_index) 
+    
+    # Get the titles of the top ten scoring movies
+    # Making sure that we keep the same structure as before
+    most_rated_movies = []
+    for i in range(len(most_rated_m)):
+        for j in range(len(movies)):
+            if (most_rated_m[i] == ('m' + str(movies.iloc[j].loc['MovieID']))):
+                print(movies.iloc[j])
+                most_rated_movies.append(j)
+                
+    np.save("most_rated_movies", most_rated_movies)
+    np.save("column_index", column_index)
+    
+    # Save the similarity matrix to a CSV file
+    limited_top30.to_csv('S0_top30.csv', index=False)
+    
+# To make S0 if needed
+S0_path = "S0_top30.csv"
+if os.path.exists(S0_path):
+    S0 = pd.read_csv(S0_path)
+else:
+    make_small_S0()
+    # Saving and Loading Dataframe
+    S0 = pd.read_csv(S0_path)
+#####
+
+def movieID_match_columnIndex():
+    
+    # Create an empty DataFrame with specified columns
+    columns = ['movie_id', 'col_id']
+    movie2col = pd.DataFrame(columns=columns)
+
+    # Load the CSV file containing R into a DataFrame
+    R = pd.read_csv("Rmat.csv")
+    
+    for i in range(len(R.columns)):
+        for j in range(len(movies)):
+            if (R.columns[i] == ('m' + str(movies.iloc[j].loc['movie_id']))):
+                
+                thisMovieID = int(movies.iloc[j].loc['movie_id'])
+                thiscolID = i
+                
+                # New row to be added
+                new_row = {'movie_id': thisMovieID, 'col_id': thiscolID}
+                
+                # Add the new row using loc
+                movie2col.loc[len(movie2col)] = new_row
+                
+                break;
+                    
+    # Save the similarity matrix to a CSV file
+    movie2col.to_csv('movie2col.csv', index=True)  
+    
+# To match column and ID
+movie2col_path = "movie2col.csv"
+if os.path.exists(movie2col_path):
+    movie2col = pd.read_csv(movie2col_path)
+else:
+    movieID_match_columnIndex()
+    # Saving and Loading Dataframe
+    movie2col = pd.read_csv(movie2col_path)
+#####
+
+def top100_match_columnIndex():
+    
+    # Create an empty DataFrame with specified columns
+    columns = ['col_id', 'hundred_id']
+    col2hundred = pd.DataFrame(columns=columns)
+        
+    # Load the CSV file containing 100 columns into a DataFrame
+    S0_100_col = pd.read_csv("S0_top30.csv")
+    
+    for i in range(len(S0_100_col.columns)):
+                
+        col_id = int(S0_100_col.columns[i])
+        hundred_id = i
+        
+        # New row to be added
+        new_row = {'col_id': col_id, 'hundred_id': hundred_id}
+        
+        # Add the new row using loc
+        col2hundred.loc[len(col2hundred)] = new_row
+        
+        break;
+                    
+    # Save the similarity matrix to a CSV file
+    col2hundred.to_csv('col2hundred.csv', index=True) 
+    
+# To match column and ID
+col2hundred_path = "col2hundred.csv"
+if os.path.exists(col2hundred_path):
+    col2hundred = pd.read_csv(col2hundred_path)
+else:
+    top100_match_columnIndex()
+    # Saving and Loading Dataframe
+    col2hundred = pd.read_csv(col2hundred_path)
+##### 
+
 def get_displayed_movies():
-    return movies.head(100)
+    
+    movies_index = np.load("most_rated_movies.npy")
+    return movies.iloc[movies_index, :]
+
+    # return movies.head(100)
 
 def dict_to_df(new_user_dict):
     
@@ -43,6 +179,26 @@ def dict_to_df(new_user_dict):
         unew_ratings.iloc[i_index] = new_user_dict[key]
     
     return unew_ratings
+
+def small_df(df_full):
+    
+    # Load the CSV containing the positions 
+    # for only 100 movies. 
+    col2hundred = pd.read_csv("col2hundred.csv")
+    
+    numCols = 100
+    
+    # Copy a DataFrame
+    small_ratings = df_full[:, :numCols]
+    # Replace all values with NaN using numpy.nan
+    small_ratings = small_ratings * np.nan
+        
+    # Loop over all keys in the dictionary
+    for i in range(numCols):
+        thisRating = col2hundred[col2hundred['hundred_id'] == i]['col_id']
+        small_ratings.iloc[i] = thisRating
+        
+    return small_ratings
     
 def get_recommended_movies(new_user_ratings):
     
@@ -53,11 +209,21 @@ def get_recommended_movies(new_user_ratings):
     else:
         newuser = new_user_ratings
         
+    if(S0_flag == True):
+        newuser = small_df(newuser)
+
     # Using IBCF function
     
     # Loading similarity matrix
-    # S = pd.read_csv('Symmetry_top30.csv')
-    S_numrows = pd.read_csv('Symmetry_top30.csv', usecols=[0])
+    if(S0_flag == True):
+        S = pd.read_csv('S0_top30.csv')
+    else:
+        S = pd.read_csv('Symmetry_top30.csv')
+    
+    if(S0_flag == True):
+        S_numrows = pd.read_csv('S0_top30.csv', usecols=[0])
+    else:
+        S_numrows = pd.read_csv('Symmetry_top30.csv', usecols=[0])
     
     # Load the CSV file containing R into a DataFrame
     R = pd.read_csv("Rmat.csv")
@@ -70,19 +236,18 @@ def get_recommended_movies(new_user_ratings):
     # Calculating predictions
     for l in range(num_movies):
         
+        """
         jump = 500
         # Reading five hundred lines at a time
         if (l % jump == 0):
             subtract = l
             chunks = pd.read_csv("Symmetry_top30.csv", skiprows=l, nrows=jump, chunksize=jump//10)
             S_partial = pd.concat(chunks)
-            
-        # Reading one line at a time
-        # Sl = pd.read_csv("Symmetry_top30.csv", skiprows=l, nrows=1)
+        """
+                    
+        Sl = S.iloc[l, :]
         
-        # Sl = S.iloc[l, :]
-        
-        Sl = S_partial.iloc[l - subtract, :]
+        # Sl = S_partial.iloc[l - subtract, :]
         Sl_w = Sl.to_numpy() * newuser.to_numpy()
         numerator = np.nansum(Sl_w)
         
@@ -123,9 +288,6 @@ def get_recommended_movies(new_user_ratings):
                 IBCF_dict.loc[i] = movies.iloc[j, :]
                     
     return IBCF_dict
-
-# dict_test = {1: 5, 2: 4}
-# test = get_recommended_movies(dict_test)
 
 def genre_movies(genre: str):
     
