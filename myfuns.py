@@ -207,6 +207,40 @@ def small_df(df_full):
     return small_ratings
 
 def get_recommended_movies(new_user_ratings):
+    
+    # Convert the dictionary to a DataFrame if needed
+    # Check if the variable is a dictionary
+    if isinstance(new_user_ratings, dict):
+        newuser = dict_to_df(new_user_ratings)
+    else:
+        newuser = new_user_ratings
+    
+    # Testing #
+    """
+    newuser.iloc[2429] = 1
+    newuser.iloc[2466] = 4
+    newuser.iloc[1924] = 5
+    newuser.iloc[1453] = 5
+    newuser.iloc[2409] = 5
+    """
+        
+    if(S0_flag == True):
+        newuser = small_df(newuser)
+        
+        
+    # Using IBCF function
+    
+    # Loading similarity matrix
+    if(S0_flag == True):
+        S = pd.read_csv('S0_top30.csv')
+    else:
+        S = pd.read_csv('Symmetry_top30.csv')
+    
+    if(S0_flag == True):
+        S_numrows = pd.read_csv('S0_top30.csv', usecols=[0])
+    else:
+        S_numrows = pd.read_csv('Symmetry_top30.csv', usecols=[0])
+    
     return movies.head(10)
     
 def get_recommended_movies2(new_user_ratings):
