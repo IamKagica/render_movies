@@ -313,6 +313,14 @@ def get_recommended_movies(new_user_ratings):
     
     # Top 10 highest values 
     N = 10
+    
+    # Get the titles of the top ten scoring movies
+    # Making sure that we keep the same structure as before
+    IBCF_dict = pd.DataFrame(columns=['movie_id', 'title', 'genres'])
+    for i in range(N):
+        for j in range(len(movies)):
+            if (unew_movie_nums[i] == ('m' + str(movies.iloc[j].loc['movie_id']))):
+                IBCF_dict.loc[i] = movies.iloc[j, :]
                     
     return movies.head(10)
     
