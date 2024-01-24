@@ -238,7 +238,28 @@ def get_recommended_movies(new_user_ratings):
         
     if(S0_flag == True):
         newuser = small_df(newuser)
-        
+    
+    # Using IBCF function
+    
+    # Loading similarity matrix
+    if(S0_flag == True):
+        S = pd.read_csv('S0_top30.csv')
+    else:
+        S = pd.read_csv('Symmetry_top30.csv')
+    
+    if(S0_flag == True):
+        S_numrows = pd.read_csv('S0_top30.csv', usecols=[0])
+    else:
+        S_numrows = pd.read_csv('Symmetry_top30.csv', usecols=[0])
+    
+    # Load the CSV file containing R into a DataFrame
+    R = pd.read_csv("Rsmall.csv")
+    
+    num_movies = np.shape(S_numrows)[0]
+    # num_movies = np.shape(S)[0]
+    # num_movies = (S)[0]
+    list_scores = np.zeros(num_movies)
+                
     # Using IBCF function
     
     return movies.head(10)
