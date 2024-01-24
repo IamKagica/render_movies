@@ -227,8 +227,7 @@ def small_df(df_full):
     return small_ratings
 
 # Testing
-"""
-def get_recommended_movies2(new_user_ratings):
+def get_recommended_movies(new_user_ratings):
     
     # Convert the dictionary to a DataFrame if needed
     # Check if the variable is a dictionary
@@ -294,11 +293,30 @@ def get_recommended_movies2(new_user_ratings):
             else:
                 score_pred = (numerator / denominator)
                 list_scores[l] = score_pred
+                
+    # Get indices of the top 10 largest values
+    top_indices = np.argsort(list_scores)[-10:][::-1]
+    
+    # Testing
+    # print(top_indices)
+    # print(list_scores[top_indices])
+    # print(R.columns[5])
+    
+    unew_movie_nums = []
+        
+    for i in range(len(top_indices)):
+                
+        # If you have the index of a column, you can get its name
+        column_index = top_indices[i]  # Getting the desired index
+        column_name_at_index = R.columns[column_index]
+        unew_movie_nums.append(column_name_at_index) 
+    
+    # Top 10 highest values 
+    N = 10
                     
     return movies.head(10)
-"""
     
-def get_recommended_movies(new_user_ratings):
+def get_recommended_movies2(new_user_ratings):
     
     # Convert the dictionary to a DataFrame if needed
     # Check if the variable is a dictionary
