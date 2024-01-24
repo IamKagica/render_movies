@@ -76,7 +76,8 @@ def make_small_S0():
     
 # To make S0 if needed
 S0_path = "S0_top30.csv"
-if os.path.exists(S0_path):
+most_rated_movies_path = "most_rated_movies.npy"
+if os.path.exists(S0_path) and os.path.exists(most_rated_movies_path):
     S0 = pd.read_csv(S0_path)
 else:
     make_small_S0()
@@ -158,10 +159,11 @@ else:
 
 def get_displayed_movies():
     
-    movies_index = np.load("most_rated_movies.npy")
-    return movies.iloc[movies_index, :]
-
-    # return movies.head(100)
+    if (S0_flag == True):
+        movies_index = np.load("most_rated_movies.npy")
+        return movies.iloc[movies_index, :]
+    else:
+        return movies.head(100)
 
 def dict_to_df(new_user_dict):
     
