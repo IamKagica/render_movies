@@ -1,3 +1,15 @@
+"""
+# STAT 542: Project 4
+
+Project 4 \
+Class: STAT 542 \
+Instructor: Feng Liang \
+Due Date: December 10, 2023 \
+Author: Phillip Sin \
+NetID: phsin2 \
+UIN: 667503275
+"""
+
 ### Uses code from the following:
 ### Title: Project 4 App (Python): What we have tried
 
