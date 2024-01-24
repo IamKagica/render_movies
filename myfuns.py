@@ -227,7 +227,8 @@ def small_df(df_full):
     return small_ratings
 
 # Testing
-def get_recommended_movies(new_user_ratings):
+"""
+def get_recommended_movies2(new_user_ratings):
     
     # Convert the dictionary to a DataFrame if needed
     # Check if the variable is a dictionary
@@ -263,15 +264,6 @@ def get_recommended_movies(new_user_ratings):
     # Calculating predictions
     for l in range(num_movies):
         
-        """
-        jump = 500
-        # Reading five hundred lines at a time
-        if (l % jump == 0):
-            subtract = l
-            chunks = pd.read_csv("Symmetry_top30.csv", skiprows=l, nrows=jump, chunksize=jump//10)
-            S_partial = pd.concat(chunks)
-        """
-                    
         Sl = S.iloc[l, :]
         
         # Sl = S_partial.iloc[l - subtract, :]
@@ -304,8 +296,9 @@ def get_recommended_movies(new_user_ratings):
                 list_scores[l] = score_pred
                     
     return movies.head(10)
+"""
     
-def get_recommended_movies2(new_user_ratings):
+def get_recommended_movies(new_user_ratings):
     
     # Convert the dictionary to a DataFrame if needed
     # Check if the variable is a dictionary
