@@ -35,7 +35,7 @@ def make_small_R():
     
     # Create a new DataFrame with the top 3 rows
     Rsmall = R.head(3).copy()
-    Rsmall.to_csv('Rsmall.csv', index=True)
+    Rsmall.to_csv('Rsmall.csv', index=False)
     
 # To make S0 if needed
 Rsmall_path = "Rsmall.csv"
@@ -129,7 +129,7 @@ def movieID_match_columnIndex():
                 break;
                     
     # Save the similarity matrix to a CSV file
-    movie2col.to_csv('movie2col.csv', index=True)  
+    movie2col.to_csv('movie2col.csv', index=False)  
     
 # To match column and ID
 movie2col_path = "movie2col.csv"
@@ -189,6 +189,8 @@ def dict_to_df(new_user_dict):
     # Load the CSV file containing R into a DataFrame
     R = pd.read_csv("Rsmall.csv")
     
+    print(R)
+        
     # Load the CSV containing the conversion from movie index
     # to the index of the Similarity matrix
     movie2col = pd.read_csv("movie2col.csv")
@@ -372,9 +374,15 @@ def get_recommended_movies(new_user_ratings):
 
 # Testing
 # dict_test = {2494: 2}
-# dict_test = {2494: 2, 962: 1, 1160: 1, 2904: 1, 214: 1, 2221: 1, 2981: 1, 2830: 1, 960: 1, 2175: 1, 3853: 1, 2503: 1, 3374: 1, 874: 1, 1026: 1, 3306: 1, 626: 1, 755: 1, 1531: 1, 649: 1, 2963: 1, 3292: 1, 2905: 1, 167: 1, 2326: 1, 3880: 1, 1412: 1, 2197: 1, 1872: 1, 40: 1, 3025: 1, 669: 1, 2211: 1, 228: 1, 3495: 1, 331: 1, 298: 1, 3796: 1, 3803: 1, 1406: 1, 570: 1, 1455: 1, 3311: 1, 3410: 1, 3092: 1, 3532: 1, 726: 1, 1076: 1, 1144: 1, 96: 1, 131: 1, 1675: 1, 189: 1, 2493: 1, 3574: 1, 957: 1, 3239: 1, 1501: 1, 2545: 1, 2765: 1, 3492: 1, 49: 1, 961: 1, 525: 1, 554: 1, 129: 1, 200: 1, 3402: 1, 394: 1, 2101: 1, 2737: 1, 2865: 1, 359: 1, 3026: 1, 974: 1, 3912: 1, 1490: 1, 2215: 1, 2979: 1, 3579: 1, 563: 1, 992: 1, 1567: 1, 2189: 1, 2426: 1, 2839: 1, 3924: 1, 769: 1, 2537: 1, 3140: 1, 128: 1, 703: 1, 1138: 1, 1666: 1, 2536: 1, 3319: 1, 3434: 1, 3670: 1, 3884: 1}
-# test = get_recommended_movies(dict_test)
-# print(test["title"])
+"""
+print(Rsmall.columns[110:116])
+for j in range(len(movies)):
+    if (Rsmall.columns[113] == ('m' + str(movies.iloc[j].loc['movie_id']))):
+        print(movies.iloc[j])
+dict_test = {2494: 2, 962: 1, 1160: 1, 2904: 1, 214: 1, 2221: 1, 2981: 1, 2830: 1, 960: 1, 2175: 1, 3853: 1, 2503: 1, 3374: 1, 874: 1, 1026: 1, 3306: 1, 626: 1, 755: 1, 1531: 1, 649: 1, 2963: 1, 3292: 1, 2905: 1, 167: 1, 2326: 1, 3880: 1, 1412: 1, 2197: 1, 1872: 1, 40: 1, 3025: 1, 669: 1, 2211: 1, 228: 1, 3495: 1, 331: 1, 298: 1, 3796: 1, 3803: 1, 1406: 1, 570: 1, 1455: 1, 3311: 1, 3410: 1, 3092: 1, 3532: 1, 726: 1, 1076: 1, 1144: 1, 96: 1, 131: 1, 1675: 1, 189: 1, 2493: 1, 3574: 1, 957: 1, 3239: 1, 1501: 1, 2545: 1, 2765: 1, 3492: 1, 49: 1, 961: 1, 525: 1, 554: 1, 129: 1, 200: 1, 3402: 1, 394: 1, 2101: 1, 2737: 1, 2865: 1, 359: 1, 3026: 1, 974: 1, 3912: 1, 1490: 1, 2215: 1, 2979: 1, 3579: 1, 563: 1, 992: 1, 1567: 1, 2189: 1, 2426: 1, 2839: 1, 3924: 1, 769: 1, 2537: 1, 3140: 1, 128: 1, 703: 1, 1138: 1, 1666: 1, 2536: 1, 3319: 1, 3434: 1, 3670: 1, 3884: 1}
+test = get_recommended_movies(dict_test)
+print(test["title"])
+"""
 
 def genre_movies(genre: str):
     
