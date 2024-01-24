@@ -227,7 +227,8 @@ def small_df(df_full):
     return small_ratings
 
 # Testing
-def get_recommended_movies(new_user_ratings):
+"""
+def get_recommended_movies2(new_user_ratings):
     
     # Convert the dictionary to a DataFrame if needed
     # Check if the variable is a dictionary
@@ -318,13 +319,15 @@ def get_recommended_movies(new_user_ratings):
     # Making sure that we keep the same structure as before
     IBCF_dict = pd.DataFrame(columns=['movie_id', 'title', 'genres'])
     for i in range(N):
-        for j in range(len(movies)):
-            if (unew_movie_nums[i] == ('m' + str(movies.iloc[j].loc['movie_id']))):
-                IBCF_dict.loc[i] = movies.iloc[j, :]
+        # Get the row index where the specified column has the desired value
+        this_movie_num = int(unew_movie_nums[i][1:])
+        row_index = movies.loc[movies['movie_id'] == this_movie_num].index[0]
+        IBCF_dict.loc[i] = movies.iloc[row_index, :]
                     
     return movies.head(10)
+"""
     
-def get_recommended_movies2(new_user_ratings):
+def get_recommended_movies(new_user_ratings):
     
     # Convert the dictionary to a DataFrame if needed
     # Check if the variable is a dictionary
@@ -443,23 +446,22 @@ def get_recommended_movies2(new_user_ratings):
     # Making sure that we keep the same structure as before
     IBCF_dict = pd.DataFrame(columns=['movie_id', 'title', 'genres'])
     for i in range(N):
-        for j in range(len(movies)):
-            if (unew_movie_nums[i] == ('m' + str(movies.iloc[j].loc['movie_id']))):
-                IBCF_dict.loc[i] = movies.iloc[j, :]
+        # Get the row index where the specified column has the desired value
+        this_movie_num = int(unew_movie_nums[i][1:])
+        row_index = movies.loc[movies['movie_id'] == this_movie_num].index[0]
+        IBCF_dict.loc[i] = movies.iloc[row_index, :]
                     
     return IBCF_dict
 
 # Testing
 # dict_test = {2494: 2}
-"""
-print(Rsmall.columns[110:116])
-for j in range(len(movies)):
-    if (Rsmall.columns[113] == ('m' + str(movies.iloc[j].loc['movie_id']))):
-        print(movies.iloc[j])
-dict_test = {2494: 2, 962: 1, 1160: 1, 2904: 1, 214: 1, 2221: 1, 2981: 1, 2830: 1, 960: 1, 2175: 1, 3853: 1, 2503: 1, 3374: 1, 874: 1, 1026: 1, 3306: 1, 626: 1, 755: 1, 1531: 1, 649: 1, 2963: 1, 3292: 1, 2905: 1, 167: 1, 2326: 1, 3880: 1, 1412: 1, 2197: 1, 1872: 1, 40: 1, 3025: 1, 669: 1, 2211: 1, 228: 1, 3495: 1, 331: 1, 298: 1, 3796: 1, 3803: 1, 1406: 1, 570: 1, 1455: 1, 3311: 1, 3410: 1, 3092: 1, 3532: 1, 726: 1, 1076: 1, 1144: 1, 96: 1, 131: 1, 1675: 1, 189: 1, 2493: 1, 3574: 1, 957: 1, 3239: 1, 1501: 1, 2545: 1, 2765: 1, 3492: 1, 49: 1, 961: 1, 525: 1, 554: 1, 129: 1, 200: 1, 3402: 1, 394: 1, 2101: 1, 2737: 1, 2865: 1, 359: 1, 3026: 1, 974: 1, 3912: 1, 1490: 1, 2215: 1, 2979: 1, 3579: 1, 563: 1, 992: 1, 1567: 1, 2189: 1, 2426: 1, 2839: 1, 3924: 1, 769: 1, 2537: 1, 3140: 1, 128: 1, 703: 1, 1138: 1, 1666: 1, 2536: 1, 3319: 1, 3434: 1, 3670: 1, 3884: 1}
-test = get_recommended_movies(dict_test)
-print(test["title"])
-"""
+# print(Rsmall.columns[110:116])
+# for j in range(len(movies)):
+#     if (Rsmall.columns[113] == ('m' + str(movies.iloc[j].loc['movie_id']))):
+#         print(movies.iloc[j])
+# dict_test = {2494: 2, 962: 1, 1160: 1, 2904: 1, 214: 1, 2221: 1, 2981: 1, 2830: 1, 960: 1, 2175: 1, 3853: 1, 2503: 1, 3374: 1, 874: 1, 1026: 1, 3306: 1, 626: 1, 755: 1, 1531: 1, 649: 1, 2963: 1, 3292: 1, 2905: 1, 167: 1, 2326: 1, 3880: 1, 1412: 1, 2197: 1, 1872: 1, 40: 1, 3025: 1, 669: 1, 2211: 1, 228: 1, 3495: 1, 331: 1, 298: 1, 3796: 1, 3803: 1, 1406: 1, 570: 1, 1455: 1, 3311: 1, 3410: 1, 3092: 1, 3532: 1, 726: 1, 1076: 1, 1144: 1, 96: 1, 131: 1, 1675: 1, 189: 1, 2493: 1, 3574: 1, 957: 1, 3239: 1, 1501: 1, 2545: 1, 2765: 1, 3492: 1, 49: 1, 961: 1, 525: 1, 554: 1, 129: 1, 200: 1, 3402: 1, 394: 1, 2101: 1, 2737: 1, 2865: 1, 359: 1, 3026: 1, 974: 1, 3912: 1, 1490: 1, 2215: 1, 2979: 1, 3579: 1, 563: 1, 992: 1, 1567: 1, 2189: 1, 2426: 1, 2839: 1, 3924: 1, 769: 1, 2537: 1, 3140: 1, 128: 1, 703: 1, 1138: 1, 1666: 1, 2536: 1, 3319: 1, 3434: 1, 3670: 1, 3884: 1}
+# test = get_recommended_movies(dict_test)
+# print(test["title"])
 
 def genre_movies(genre: str):
     
