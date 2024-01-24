@@ -188,9 +188,7 @@ def dict_to_df(new_user_dict):
     
     # Load the CSV file containing R into a DataFrame
     R = pd.read_csv("Rsmall.csv")
-    
-    print(R)
-        
+            
     # Load the CSV containing the conversion from movie index
     # to the index of the Similarity matrix
     movie2col = pd.read_csv("movie2col.csv")
@@ -229,7 +227,6 @@ def small_df(df_full):
     return small_ratings
 
 # Testing
-"""
 def get_recommended_movies(new_user_ratings):
     
     # Convert the dictionary to a DataFrame if needed
@@ -245,9 +242,8 @@ def get_recommended_movies(new_user_ratings):
     # Using IBCF function
     
     return movies.head(10)
-"""
     
-def get_recommended_movies(new_user_ratings):
+def get_recommended_movies2(new_user_ratings):
     
     # Convert the dictionary to a DataFrame if needed
     # Check if the variable is a dictionary
