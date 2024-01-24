@@ -205,8 +205,11 @@ def small_df(df_full):
         small_ratings.iloc[i] = thisRating
         
     return small_ratings
-    
+
 def get_recommended_movies(new_user_ratings):
+    return movies.head(10)
+    
+def get_recommended_movies2(new_user_ratings):
     
     # Convert the dictionary to a DataFrame if needed
     # Check if the variable is a dictionary
@@ -226,9 +229,7 @@ def get_recommended_movies(new_user_ratings):
         
     if(S0_flag == True):
         newuser = small_df(newuser)
-        
-    return movies.head(10)
-        
+                
     # print(np.nansum(newuser))
 
     # Using IBCF function
