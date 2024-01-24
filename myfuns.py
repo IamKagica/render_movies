@@ -58,14 +58,13 @@ def make_small_S0():
         column_index = int(top_columns[i])  # Getting the desired index
         column_name_at_index = R.columns[column_index]
         most_rated_m.append(column_name_at_index) 
-    
+        
     # Get the titles of the top ten scoring movies
     # Making sure that we keep the same structure as before
     most_rated_movies = []
     for i in range(len(most_rated_m)):
         for j in range(len(movies)):
-            if (most_rated_m[i] == ('m' + str(movies.iloc[j].loc['MovieID']))):
-                print(movies.iloc[j])
+            if (most_rated_m[i] == ('m' + str(movies.iloc[j].loc['movie_id']))):
                 most_rated_movies.append(j)
                 
     np.save("most_rated_movies", most_rated_movies)
@@ -73,7 +72,7 @@ def make_small_S0():
     
     # Save the similarity matrix to a CSV file
     limited_top30.to_csv('S0_top30.csv', index=False)
-    
+        
 # To make S0 if needed
 S0_path = "S0_top30.csv"
 most_rated_movies_path = "most_rated_movies.npy"
@@ -131,7 +130,9 @@ def top100_match_columnIndex():
     # Load the CSV file containing 100 columns into a DataFrame
     S0_100_col = pd.read_csv("S0_top30.csv")
     
-    for i in range(len(S0_100_col.columns)):
+    num_columns = np.shape(S0_100_col)[1]
+    
+    for i in range(num_columns):
                 
         col_id = int(S0_100_col.columns[i])
         hundred_id = i
@@ -141,11 +142,9 @@ def top100_match_columnIndex():
         
         # Add the new row using loc
         col2hundred.loc[len(col2hundred)] = new_row
-        
-        break;
-                    
+                            
     # Save the similarity matrix to a CSV file
-    col2hundred.to_csv('col2hundred.csv', index=True) 
+    col2hundred.to_csv('col2hundred.csv', index=False) 
     
 # To match column and ID
 col2hundred_path = "col2hundred.csv"
@@ -170,6 +169,10 @@ def dict_to_df(new_user_dict):
     # Load the CSV file containing R into a DataFrame
     R = pd.read_csv("Rmat.csv")
     
+    # Load the CSV containing the conversion from movie index
+    # to the index of the Similarity matrix
+    movie2col = pd.read_csv("movie2col.csv")
+    
     # Copy a DataFrame
     unew_ratings = R.iloc[0, :]
     # Replace all values with NaN using numpy.nan
@@ -177,9 +180,9 @@ def dict_to_df(new_user_dict):
         
     # Loop over all keys in the dictionary
     for key in new_user_dict:
-        i_index = int(key) - 1
+        i_index = movie2col[movie2col['movie_id'] == key]['col_id']
         unew_ratings.iloc[i_index] = new_user_dict[key]
-    
+        
     return unew_ratings
 
 def small_df(df_full):
@@ -190,14 +193,15 @@ def small_df(df_full):
     
     numCols = 100
     
-    # Copy a DataFrame
-    small_ratings = df_full[:, :numCols]
+    # Create a new DataFrame with the first 100 columns
+    small_ratings = df_full.iloc[:numCols].copy()
     # Replace all values with NaN using numpy.nan
     small_ratings = small_ratings * np.nan
-        
+            
     # Loop over all keys in the dictionary
     for i in range(numCols):
-        thisRating = col2hundred[col2hundred['hundred_id'] == i]['col_id']
+        thisRatingIndex = col2hundred[col2hundred['hundred_id'] == i]['col_id']
+        thisRating = df_full[thisRatingIndex]
         small_ratings.iloc[i] = thisRating
         
     return small_ratings
@@ -210,9 +214,20 @@ def get_recommended_movies(new_user_ratings):
         newuser = dict_to_df(new_user_ratings)
     else:
         newuser = new_user_ratings
+    
+    # Testing #
+    """
+    newuser.iloc[2429] = 1
+    newuser.iloc[2466] = 4
+    newuser.iloc[1924] = 5
+    newuser.iloc[1453] = 5
+    newuser.iloc[2409] = 5
+    """
         
     if(S0_flag == True):
         newuser = small_df(newuser)
+        
+    # print(np.nansum(newuser))
 
     # Using IBCF function
     
@@ -235,6 +250,8 @@ def get_recommended_movies(new_user_ratings):
     # num_movies = (S)[0]
     list_scores = np.zeros(num_movies)
     
+    # print(newuser)
+    
     # Calculating predictions
     for l in range(num_movies):
         
@@ -256,18 +273,41 @@ def get_recommended_movies(new_user_ratings):
         Sl_1 = Sl.to_numpy() * (newuser.to_numpy() / newuser.to_numpy())
         denominator = np.nansum(Sl_1)
         
-        if (np.isnan(newuser.iloc[l]) == False):
-            # Will set movies that have already been seen as lowest priority.
-            list_scores[l] = -1
-        elif (np.isnan(denominator) == True or denominator == 0):
-            # If there aren't enough predictions, will set to zero. 
-            list_scores[l] = 0
+        # Check if the object is a dictionary
+        if isinstance(new_user_ratings, dict):
+            if new_user_ratings.get(l) is not None:
+                # Will set movies that have already been seen as lowest priority.
+                list_scores[l] = -1
+            elif (np.isnan(denominator) == True or denominator == 0):
+                # If there aren't enough predictions, will set to zero. 
+                list_scores[l] = 0
+            else:
+                score_pred = (numerator / denominator)
+                list_scores[l] = score_pred
         else:
-            score_pred = (numerator / denominator)
-            list_scores[l] = score_pred
-                
+            if (np.isnan(newuser.iloc[l]) == False):
+                # Will set movies that have already been seen as lowest priority.
+                list_scores[l] = -1
+            elif (np.isnan(denominator) == True or denominator == 0):
+                # If there aren't enough predictions, will set to zero. 
+                list_scores[l] = 0
+            else:
+                score_pred = (numerator / denominator)
+                list_scores[l] = score_pred
+        # Testing    
+        """        
+        if (l == 5):
+            print("Predicted Score is")
+            print(score_pred)
+        """
+                                            
     # Get indices of the top 10 largest values
     top_indices = np.argsort(list_scores)[-10:][::-1]
+    
+    # Testing
+    # print(top_indices)
+    # print(list_scores[top_indices])
+    # print(R.columns[5])
     
     unew_movie_nums = []
         
@@ -290,6 +330,12 @@ def get_recommended_movies(new_user_ratings):
                 IBCF_dict.loc[i] = movies.iloc[j, :]
                     
     return IBCF_dict
+
+# Testing
+# dict_test = {2494: 2}
+# dict_test = {2494: 2, 962: 1, 1160: 1, 2904: 1, 214: 1, 2221: 1, 2981: 1, 2830: 1, 960: 1, 2175: 1, 3853: 1, 2503: 1, 3374: 1, 874: 1, 1026: 1, 3306: 1, 626: 1, 755: 1, 1531: 1, 649: 1, 2963: 1, 3292: 1, 2905: 1, 167: 1, 2326: 1, 3880: 1, 1412: 1, 2197: 1, 1872: 1, 40: 1, 3025: 1, 669: 1, 2211: 1, 228: 1, 3495: 1, 331: 1, 298: 1, 3796: 1, 3803: 1, 1406: 1, 570: 1, 1455: 1, 3311: 1, 3410: 1, 3092: 1, 3532: 1, 726: 1, 1076: 1, 1144: 1, 96: 1, 131: 1, 1675: 1, 189: 1, 2493: 1, 3574: 1, 957: 1, 3239: 1, 1501: 1, 2545: 1, 2765: 1, 3492: 1, 49: 1, 961: 1, 525: 1, 554: 1, 129: 1, 200: 1, 3402: 1, 394: 1, 2101: 1, 2737: 1, 2865: 1, 359: 1, 3026: 1, 974: 1, 3912: 1, 1490: 1, 2215: 1, 2979: 1, 3579: 1, 563: 1, 992: 1, 1567: 1, 2189: 1, 2426: 1, 2839: 1, 3924: 1, 769: 1, 2537: 1, 3140: 1, 128: 1, 703: 1, 1138: 1, 1666: 1, 2536: 1, 3319: 1, 3434: 1, 3670: 1, 3884: 1}
+# test = get_recommended_movies(dict_test)
+# print(test["title"])
 
 def genre_movies(genre: str):
     
